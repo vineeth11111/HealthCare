@@ -1,0 +1,149 @@
+<html xmlns:th="https://www.thymeleaf.org/">
+
+ <div th:replace="fragments/commonui :: header"></div>
+<body>
+<div th:replace="fragments/commonui :: menu"></div>
+    <div class="container">
+     <div class="card-heder bg-primary text-white text-center">
+      <h2>Patient Register</h2>
+     </div>
+     <div class="card-body">
+        <form th:action="@{/patient/save}" method="POST" >
+        <!-- row--1 -->
+        <div class="row">
+           <div class="col-2"><label for="firstName">First Name</label></div>
+           <div class="col-4">
+           <input type="text" class="form-control" id="firstName" name="firstName">
+           </div>
+           <div class="col-6"><span id="firstNameError"></span></div>
+        </div>
+        <!-- row--2 -->
+        <div class="row">
+            <div class="col-2"><label for="lastName">Last Name</label></div>
+            <div class="col-4">
+            <input type="text" class="form-control" id="lastName" name="lastName">
+            </div>
+            <div class="col-6"><span id="lastNameError"></span></div>
+         </div>
+         <!-- row--3 -->
+        <div class="row">
+            <div class="col-2"><label for="gender">Gender</label></div>
+            <div class="col-4">
+                <select name="gender" id="gender" class="form-control">
+                    <option value="Male">Male</option>
+                    <option value="FeMale">FeMale</option>
+                    <option value="Other">Other</option>
+                </select>
+             </div>
+            <div class="col-6"><span id="genderError"></span></div>
+         </div>
+      <!--mobile row -4 -->
+         <div class="row">
+            <div class="col-2">
+                <label for="mobile">Mobile</label>
+            </div>
+            <div class="col-4">
+                <input type="text" class="form-control" id="mobile" name="mobile"> 
+            </div>
+            <div class="col-6">
+                <span id="mobileError"></span>
+            </div>
+         </div>
+         
+         <!--mobile email -4 -->
+         <div class="row">
+            <div class="col-2">
+                <label for="email">Email</label>
+            </div>
+            <div class="col-4">
+                <input type="text" class="form-control" id="email" name="email"> 
+            </div>
+            <div class="col-6">
+                <span id="emailError"></span>
+            </div>
+         </div>
+
+         <!--mobile row -5 -->
+         <div class="row">
+            <div class="col-2">
+                <label for="dateOfBirth">DOB</label>
+            </div>
+            <div class="col-4">
+                <input type="date" class="form-control" id="dob" name="dob"> 
+            </div>
+            <div class="col-6">
+                <span id="dateOfBirthError"></span>
+            </div>
+         </div>
+         <!-- row--6 -->
+        <div class="row">
+            <div class="col-2"><label for="maritalStatus">Marital Status </label></div>
+            <div class="col-4">
+            <div><input type="radio" id="maritalStatus" name="maritalStatus" value="Married"> Married
+            <input type="radio" id="maritalStatus" name="maritalStatus" value="UnMarried"> UnMarried</div>
+            <div>
+            <input type="radio" id="maritalStatus" name="maritalStatus" value="Divorse"> Divorse
+            <input type="radio" id="maritalStatus" name="maritalStatus" value="Legally Separated">LegallySeparated
+            </div>
+            </div>
+            <div class="col-6"><span id="marialStatusError"></span></div>
+         </div>
+         <!-- row--7 -->
+        <div class="row">
+            <div class="col-2"><label for="presentAddress">Present
+            Address</label></div>
+            <div class="col-4">
+            <textarea id="presentAddress" class="form-control" name="presentAddress"></textarea>
+            </div>
+            <div class="col-6"><span id="presentAddressError"></span></div>
+         </div>
+         <!-- row--8 -->
+         <div class="row">
+             <div class="col-2"><label for="communicationAddress">Communication Address</label></div>
+             <div class="col-4">
+             <textarea id="communicationAddress" class="form-control" name="communicationAddress"></textarea>
+             </div>
+             <div class="col-6"><span id="communicationAddressError"></span></div>
+          </div>
+          <!-- row--9 -->
+         <div class="row">
+            <div class="col-2"><label for="">Medical History</label></div>
+            <div class="col-4">
+                <input type="checkbox" name="pastMedicalHistory" id="pastMedicalHistory1" value="Ulcer"/>Ulcer
+                <input type="checkbox" name="pastMedicalHistory" id="pastMedicalHistory2" value="Cancer"/>Cancer
+                <input type="checkbox" name="pastMedicalHistory" id="pastMedicalHistory3" value="BP"/>BP
+                <input type="checkbox" name="pastMedicalHistory" id="pastMedicalHistory4" value="Sugar"/>Sugar
+                
+
+            </div>
+            <div class="col-6"><span id="pastMedicalHistoryError"></span></div>
+         </div>
+         <!-- row--10 -->
+         <div class="row">
+            <div class="col-2"><label for="ifOther">IF Other History  <input type="checkbox" name="pastMedicalHistory" id="pastMedicalHistory5" value="ifOther"/></label></div>
+            <div class="col-4">
+               
+                <input type="text" name="ifOther" id="ifOther" class="form-control"/>
+            </div>
+            <div class="col-6"><span id="otherDetailsError"></span></div>
+         </div>
+          <!-- row--10 -->
+         <div class="row">
+            <div class="col-2"><label for="other">Other Details</label></div>
+            <div class="col-4">
+            <textarea id="other" class="form-control" name="other"></textarea>
+            </div>
+            <div class="col-6"><span id="otherError"></span></div>
+         </div>
+          
+          <button type="submit" class="btn btn-success">Submit</button>
+
+        </form>
+     </div>
+     <div th:if="${message!=null}" class="card-footer text-white text-center bg-success" >
+          <span th:text="${message}"></span>
+     </div>
+     
+
+    </div>
+</body>

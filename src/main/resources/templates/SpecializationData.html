@@ -1,0 +1,36 @@
+<html xmlns:th="https://www.thymeleaf.org/">
+     <div th:replace="fragments/commonui :: header"></div>
+    <body>
+    <div th:replace="fragments/commonui :: menu"></div>
+        <div class="container">
+            <div class="card-header bg-primary text-center text-white">
+                <h2>Specialization Data</h2>
+            </div>
+            <div class="card-body">
+                <table class="table table-hover">
+                    <tr class="text-white bg-success">
+                        <th>Code</th>
+                            <th>Name</th>
+                                <th>Note</th>
+                                    <th>Opertions</th>
+                    </tr>
+                    <tr th:each="ob:${list}">
+                        <td th:text="${ob.code}"></td>
+                        <td th:text="${ob.name}"></td>
+                        <td th:text="${ob.note}"></td>
+                        <td> <a th:href="@{/spec/delete(id=${ob.id})}" class="btn btn-danger">DELETE</a>
+                            <a th:href="@{/spec/edit(id=${ob.id})}" class="btn btn-success">EDIT</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+           
+            <div th:if="${message}!=null" class="card-footer bg-success text-white text-center">
+                <span th:text="${message}"></span>
+              </div>
+            
+            
+        </div>
+    </body>
+    
+</html>    

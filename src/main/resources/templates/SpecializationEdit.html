@@ -1,0 +1,66 @@
+<html xmlns:th="https://www.thymeleaf.org/">
+     <div th:replace="fragments/commonui :: header"></div>
+    <body>
+    <div th:replace="fragments/commonui :: menu"></div>
+        <div class="container">
+              <div class="card-header text-white text-center bg-primary">
+                <h2>Specialization Edit</h2>
+              </div>
+              <div class="card-body">
+                  <form th:action="@{/spec/update}" method="POST" th:object="${specialization}">
+                  <!-- row-0 -->
+                   <div class="row">
+                    <div class="col-2">
+                        <label for="code">S.No</label>
+                    </div>
+                    <div class="col-4">
+                        <input type="text"  class="form-control" th:field="*{id}" readonly>
+                    </div>
+                    
+                   </div>
+                    <!-- row-1 -->
+                   <div class="row">
+                    <div class="col-2">
+                        <label for="code">Code</label>
+                    </div>
+                    <div class="col-4">
+                        <input type="text"  class="form-control" th:field="*{code}">
+                    </div>
+                    <div class="col-6">
+                        <span id="codeError"></span>
+                    </div>
+                   </div>
+                   <!-- row-2 -->
+                   <div class="row">
+                    <div class="col-2">
+                        <label for="name">Name</label>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" class="form-control"  th:field="*{name}">
+                    </div>
+                    <div class="col-6">
+                        <span id="nameError"></span>
+                    </div>
+                   </div>
+                   <!-- row-3 -->
+                   <div class="row">
+                    <div class="col-2">
+                        <label for="note">Note</label>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" class="form-control"  th:field="*{note}">
+                    </div>
+                    <div class="col-6">
+                        <span id="noteError"></span>
+                    </div>
+                   </div>
+                   <button value="submit" class="btn btn-success">Update</button>
+                  </form>
+              </div>
+              <div th:if="${message}!=null" class="card-footer bg-success text-white text-center">
+                <span th:text="${message}"></span>
+              </div>
+
+        </div>
+    </body>
+</html>

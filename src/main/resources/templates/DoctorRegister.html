@@ -1,0 +1,156 @@
+<html xmlns:th="https://www.thymeleaf.org/">
+
+ <div th:replace="fragments/commonui :: header"></div>
+<body>
+<div th:replace="fragments/commonui :: menu"></div>
+    <div class="container">
+            <div class="card-header text-white bg-primary text-center">
+                   <h2>Doctor Register</h2>
+            </div>
+            <div class="card-body">
+                
+                <form id="doctorForm" method="POST" th:action="@{/doctor/save}">
+                    <!-- row-1 -->
+                    <div class="row">
+                        <div class="col-2"><label for="firstName">First Name:</label></div>
+                      <div class="col-4">
+                            <input type="text" class="form-control" id="firstName" name="firstName">
+                      </div>
+                      <div class="col-6">
+                        <span id="firstNameError"></span>
+                      </div>
+                      </div>
+    
+                      <!-- row-2 -->
+                      <div class="row">
+                        <div class="col-2"><label for="lastName">Last Name:</label></div>
+                      <div class="col-4">
+                        <input type="text" class="form-control" id="lastName" name="lastName">
+                      </div>
+                      <div class="col-6">
+                        <span id="lastNameError"></span>
+                      </div>
+                      </div>
+                      
+                      <!-- row- Spec -->
+                      <div class="row">
+                        <div class="col-2"><label for="specialization">Specialization</label></div>
+                      <div class="col-4">
+                        <select name="specialization.id" id="specialization" class="form-control">
+                        <option value="">--SELECT--</option>
+                        <option th:each="ob:${specializations}" th:value="${ob.key}" th:text="${ob.value}"></option>
+                        </select>
+                      </div>
+                      <div class="col-6">
+                        <span id="lastNameError"></span>
+                      </div>
+                      </div>
+    
+                      <!-- row-3 -->
+                      <div class="row">
+                        <div class="col-2"><label for="email">Email:</label></div>
+                      <div class="col-4">
+                        <input type="text" class="form-control" id="email" name="email">
+                      </div>
+                      <div class="col-6">
+                        <span id="emailError"></span>
+                      </div>
+                      </div>
+    
+                      <!-- row-4 -->
+                      <div class="row">
+                        <div class="col-2"><label for="address">Address:</label></div>
+                      <div class="col-4">
+                        <textarea id="address" class="form-control" name="address"></textarea>
+                      </div>
+                      <div class="col-6">
+                        <span id="addressError"></span>
+                      </div>
+                      </div>
+    
+                      <!-- row-5 -->
+                      <div class="row">
+                        <div class="col-2"><label for="mobile">Mobile:</label></div>
+                      <div class="col-4">
+                        <input type="text" class="form-control" id="mobile" name="mobile">
+                      </div>
+                      <div class="col-6">
+                        <span id="mobileError"></span>
+                      </div>
+                      </div>
+    
+                      <!-- row-6 -->
+                      <div class="row">
+                        <div class="col-2"><label for="gender">Gender:</label></div>
+                      <div class="col-4">
+                        <input type="radio" name="gender" id="gender1" value="Male">Male
+                        <input type="radio" name="gender" id="gender2 " value="FeMale">FeMale
+                      </div>
+                      <div class="col-6">
+                        <span id="genderError"></span>
+                      </div>
+                      </div>
+    
+                      <!-- row-7 -->
+                      <div class="row">
+                        <div class="col-2"><label for="note">Note:</label></div>
+                      <div class="col-4">
+                        <textarea id="note" class="form-control" name="note"></textarea>
+                      </div>
+                      <div class="col-6">
+                        <span id="noteError"></span>
+                      </div>
+                      </div>
+    
+                      <button value="submit" class="btn btn-success">Submit</button>
+                </form>
+            </div>
+            <div class="card-footer bg-success text-white text-center" th:if="${message}!=null">
+                  <span th:text="${message}"></span>
+            </div>
+        </div>
+        <script>
+            $(document).ready(function(){
+
+                //1.hide the content
+                $("#firstNameError").hide();
+
+                //2.create a Error variable
+                var firstNameError = false;
+
+                //3.create function
+                function validate_firstName()
+                {
+                       var val = $("#firstName").val();
+                       var exp = /^[a-zA-Z\s]{2,20}$/;
+                       
+                       if(val=='')
+                       {
+                        $("#firstNameError").show();
+                        $("#firstNameError").html("please enter the first name");
+                        $("#firstNameError").css('color','red');
+                        firstNameError = false;
+                       }else if(!exp.test(val))
+                       {
+                        $("#firstNameError").show();
+                        $("#firstNameError").html("please enter min 2 to max 20 characters");
+                        $("#firstNameError").css('color','red');
+                        firstNameError = false;
+                       }
+                       else{
+                        $("#firstNameError").hide();
+                        firstNameError = true;
+                       }
+                       return firstNameError;
+                }
+
+                //4.create response on input
+                $("#firstName").keyup(function(){
+                   validate_firstName();
+                });
+
+                //5. call all functions
+            });
+        </script>
+</body>
+</html>
