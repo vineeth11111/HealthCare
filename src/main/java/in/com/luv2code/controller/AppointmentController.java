@@ -1,6 +1,7 @@
 package in.com.luv2code.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import in.com.luv2code.entity.Appointment;
+import in.com.luv2code.entity.Doctor;
 import in.com.luv2code.exception.AppointmentNotFoundException;
 import in.com.luv2code.service.IAppointmentService;
 import in.com.luv2code.service.IDoctorService;
+import in.com.luv2code.service.ISpecializationService;
 
 @Controller
 @RequestMapping("/app")
@@ -26,6 +29,9 @@ public class AppointmentController {
 	
 	@Autowired
 	private IDoctorService doctorService;
+	
+	@Autowired
+	private ISpecializationService specializationService;
 	
 	private void dynamicUI(Model model)
 	{
@@ -106,7 +112,33 @@ public class AppointmentController {
 		}
 		
 	}
-
+	
+	//view appointment page
+	@GetMapping("/view")
+	public String viewSlots(@RequestParam(required=false,defaultValue = "0") Long specId,
+			Model model)
+	{
+		//fetch data for Spec DropDown
+		Map<Long,String> specMap = specializationService.getSpecIdAndName();
+		model.addAttribute("specialization",specMap);
+		List<Doctor> docList = null;
+		String message = null;
+		if(specId <= 0) {//if they did not select any spec
+			
+			 docList = doctorService.getAllDoctors();
+			 message = "Result: All Doctors";
+		}else {
+			 docList = doctorService.findDoctorBySpecName(specId);
+			 message = "Result:"+specializationService.getOneSpecializationUsingId(specId).getName()+"Doctor ";
+		}
+		model.addAttribute("docList",docList);
+		
+		model.addAttribute("message",message);
+		return "AppointmentSearch";
+	}
+    //book appointment
+	
+	
 	
 	
 

@@ -76,6 +76,11 @@ public class DoctorServiceImpl implements IDoctorService {
 		return MyCollectionsUtil.convertToMap3(list);
 	}
 
-	
+	@Override
+	public List<Doctor> findDoctorBySpecName(Long specId) {
+		
+		return doctorRepo.findDoctorBySpecName(specId);
+	}
 
+	
 }
